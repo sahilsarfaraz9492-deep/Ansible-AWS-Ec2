@@ -1,0 +1,17 @@
+
+---
+- name: Install base packages
+  ansible.builtin.package:
+    name: "{{ base_packages }}"
+    state: present
+
+- name: Set hostname to inventory name
+  ansible.builtin.hostname:
+    name: "{{ inventory_hostname }}"
+
+- name: Set login banner
+  ansible.builtin.copy:
+    dest: /etc/motd
+    content: "Managed by Ansible. Environment: {{ environment_name }}\n"
+    mode: "0644"
+

@@ -1,0 +1,26 @@
+
+---
+- name: Install nginx
+  ansible.builtin.package:
+    name: nginx
+    state: present
+
+- name: Hide nginx version
+  ansible.builtin.copy:
+    dest: /etc/nginx/conf.d/security.conf
+    content: "server_tokens off;\n"
+    mode: "0644"
+  notify: Reload nginx
+
+- name: Deploy home page from template
+  ansible.builtin.template:
+    src: index.html.j2
+    dest: /usr/share/nginx/html/index.html
+    mode: "0644"
+
+- name: Enable and start nginx
+  ansible.builtin.service:
+    name: nginx
+    state: started
+    enabled: true
+

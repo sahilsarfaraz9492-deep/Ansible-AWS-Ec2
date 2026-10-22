@@ -1,0 +1,6 @@
+---
+base_packages:
+  - git
+
+app_title: "Ansible Fleet Demo"
+environment_name: lab

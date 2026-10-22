@@ -1,0 +1,14 @@
+
+---
+- name: Baseline for every server
+  hosts: servers
+  become: true
+  roles:
+    - common
+
+- name: Configure web servers
+  hosts: web
+  become: true
+  roles:
+    - nginx
+
